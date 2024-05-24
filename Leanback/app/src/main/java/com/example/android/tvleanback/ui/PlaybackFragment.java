@@ -50,20 +50,20 @@ import com.example.android.tvleanback.model.Video;
 import com.example.android.tvleanback.model.VideoCursorMapper;
 import com.example.android.tvleanback.player.VideoPlayerGlue;
 import com.example.android.tvleanback.presenter.CardPresenter;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.SimpleExoPlayer;
+//import com.google.android.exoplayer2.ExoPlayerFactory;
+//import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ext.leanback.LeanbackPlayerAdapter;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
+//import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+//import com.google.android.exoplayer2.source.ExtractorMediaSource;
+//import com.google.android.exoplayer2.source.MediaSource;
+//import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+//import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+//import com.google.android.exoplayer2.trackselection.TrackSelection;
+//import com.google.android.exoplayer2.trackselection.TrackSelector;
+//import com.google.android.exoplayer2.upstream.BandwidthMeter;
+//import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+//import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+//import com.google.android.exoplayer2.util.Util;
 
 import static com.example.android.tvleanback.ui.PlaybackFragment.VideoLoaderCallbacks.RELATED_VIDEOS_LOADER;
 
@@ -77,8 +77,8 @@ public class PlaybackFragment extends VideoSupportFragment {
 
     private VideoPlayerGlue mPlayerGlue;
     private LeanbackPlayerAdapter mPlayerAdapter;
-    private SimpleExoPlayer mPlayer;
-    private TrackSelector mTrackSelector;
+//    private SimpleExoPlayer mPlayer;
+//    private TrackSelector mTrackSelector;
     private PlaylistActionListener mPlaylistActionListener;
 
     private Video mVideo;
@@ -107,17 +107,17 @@ public class PlaybackFragment extends VideoSupportFragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (Util.SDK_INT > 23) {
-            initializePlayer();
-        }
+//        if (Util.SDK_INT > 23) {
+//            initializePlayer();
+//        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if ((Util.SDK_INT <= 23 || mPlayer == null)) {
-            initializePlayer();
-        }
+//        if ((Util.SDK_INT <= 23 || mPlayer == null)) {
+//            initializePlayer();
+//        }
     }
 
     /** Pauses the player. */
@@ -129,27 +129,27 @@ public class PlaybackFragment extends VideoSupportFragment {
         if (mPlayerGlue != null && mPlayerGlue.isPlaying()) {
             mPlayerGlue.pause();
         }
-        if (Util.SDK_INT <= 23) {
-            releasePlayer();
-        }
+//        if (Util.SDK_INT <= 23) {
+//            releasePlayer();
+//        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (Util.SDK_INT > 23) {
-            releasePlayer();
-        }
+//        if (Util.SDK_INT > 23) {
+//            releasePlayer();
+//        }
     }
 
     private void initializePlayer() {
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory =
-                new AdaptiveTrackSelection.Factory(bandwidthMeter);
-        mTrackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-
-        mPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), mTrackSelector);
-        mPlayerAdapter = new LeanbackPlayerAdapter(getActivity(), mPlayer, UPDATE_DELAY);
+//        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+//        TrackSelection.Factory videoTrackSelectionFactory =
+//                new AdaptiveTrackSelection.Factory(bandwidthMeter);
+//        mTrackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+//
+//        mPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), mTrackSelector);
+//        mPlayerAdapter = new LeanbackPlayerAdapter(getActivity(), mPlayer, UPDATE_DELAY);
         mPlaylistActionListener = new PlaylistActionListener(mPlaylist);
         mPlayerGlue = new VideoPlayerGlue(getActivity(), mPlayerAdapter, mPlaylistActionListener);
         mPlayerGlue.setHost(new VideoSupportFragmentGlueHost(this));
@@ -162,14 +162,14 @@ public class PlaybackFragment extends VideoSupportFragment {
     }
 
     private void releasePlayer() {
-        if (mPlayer != null) {
-            mPlayer.release();
-            mPlayer = null;
-            mTrackSelector = null;
-            mPlayerGlue = null;
-            mPlayerAdapter = null;
-            mPlaylistActionListener = null;
-        }
+//        if (mPlayer != null) {
+//            mPlayer.release();
+//            mPlayer = null;
+//            mTrackSelector = null;
+//            mPlayerGlue = null;
+//            mPlayerAdapter = null;
+//            mPlaylistActionListener = null;
+//        }
     }
 
     private void play(Video video) {
@@ -180,16 +180,16 @@ public class PlaybackFragment extends VideoSupportFragment {
     }
 
     private void prepareMediaForPlaying(Uri mediaSourceUri) {
-        String userAgent = Util.getUserAgent(getActivity(), "VideoPlayerGlue");
-        MediaSource mediaSource =
-                new ExtractorMediaSource(
-                        mediaSourceUri,
-                        new DefaultDataSourceFactory(getActivity(), userAgent),
-                        new DefaultExtractorsFactory(),
-                        null,
-                        null);
-
-        mPlayer.prepare(mediaSource);
+//        String userAgent = Util.getUserAgent(getActivity(), "VideoPlayerGlue");
+//        MediaSource mediaSource =
+//                new ExtractorMediaSource(
+//                        mediaSourceUri,
+//                        new DefaultDataSourceFactory(getActivity(), userAgent),
+//                        new DefaultExtractorsFactory(),
+//                        null,
+//                        null);
+//
+//        mPlayer.prepare(mediaSource);
     }
 
     private ArrayObjectAdapter initializeRelatedVideosRow() {
